@@ -143,7 +143,9 @@ def read_debcontrol(path):
         print('Cannot read debian package informations from \'%s\'.' % path)
         sys.exit(1)
 
+    print('Deb Control File')
     for line in filedesc.readlines():
+        print('-> %s' % line)
         line = line.rstrip('\n')
         try:
             (variable, value) = [splited.strip().lower()
@@ -174,7 +176,7 @@ def read_debcontrol(path):
             elif value == 'i686':
                 result['architecture'] = 'i686'
             else:
-                result['architecture'] = 'all'
+                result['architecture'] = 'x86_64'
 
     filedesc.close()
 
