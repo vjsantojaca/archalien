@@ -264,8 +264,12 @@ def convert(input_pkg, output_pkg=''):
         os.system('tar xf \'%s\' -C \'%s\'' %
                   (os.path.join(input_tmpd, data_path),
                    output_tmpd))
-        os.system('tar xf \'%s\'' %
+        if os.path.exists(os.path.join(input_tmpd, 'control.tar.gz')):
+            os.system('tar xf \'%s\'' %
                   (os.path.join(input_tmpd, 'control.tar.gz')))
+        else:
+            os.system('tar xf \'%s\'' %
+                  (os.path.join(input_tmpd, 'control.tar.xz')))
 
         # Reading 'control' file, from the deb archive
         deb_info = read_debcontrol(os.path.join(input_tmpd, 'control'))
